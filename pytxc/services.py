@@ -4,6 +4,7 @@ from typing import List, Optional
 
 from .elements import Element, Ref
 from .journeys import JourneyPattern
+from .operators import OperatorRef
 
 
 class Line(Element):
@@ -168,6 +169,11 @@ class Service(Element):
     def standard_services(self) -> List[StandardService]:
         path = "StandardService"
         return [StandardService(element) for element in self.find_all(path)]
+
+    @property
+    def operator_ref(self) -> Optional[OperatorRef]:
+        path = "RegisteredOperatorRef"
+        return self._create_ref(path, OperatorRef)
 
 
 class ServiceRef(Ref):
