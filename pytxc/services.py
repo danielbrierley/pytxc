@@ -90,6 +90,28 @@ class OperatingProfile(Element):
         path = "RegularDayType/HolidaysOnly"
         elem = self.find(path)
         return elem is not None
+    
+    @property
+    def working_days(self) -> str:
+        return 'null'
+    
+    @property
+    def days_of_operation(self) -> str:
+        path = "ServicedOrganisationDayType/DaysOfOperation/WorkingDays/ServicedOrganisationRef"
+        elem = self.find(path)
+        if elem:
+            return elem.text
+        else:
+            return None
+    
+    @property
+    def days_of_non_operation(self) -> str:
+        path = "ServicedOrganisationDayType/DaysOfNonOperation/WorkingDays/ServicedOrganisationRef"
+        elem = self.find(path)
+        if elem:
+            return elem.text
+        else:
+            return None
 
     @property
     def days_of_week(self) -> List[DayOfWeek]:
